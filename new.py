@@ -7,114 +7,95 @@ class BMI:
         self.Weight = Weight
         self.height = height
 
-        while True:
+    def BMR(self):
 
-            if self.gender == '남자':
+        if self.gender == '남자':
 
-                global Bmi = 66.47 + (13.75 * self.Weight) + (5 * self.height) - (6.76 * self.age)
-                print(" BMI :",a)
-                break
-                
+            Bmr = 66.47 + (13.75 * self.Weight) + (5 * self.height) - (6.76 * self.age)
+            
+        elif self.gender == '여자':
 
-            elif self.gender == '여자':
+            Bmr = 65.51 + (9.56 * self.Weight) + (1.85 * self.height) - (4.68 * self.age)
 
-                global Bmi = 65.51 + (9.56 * self.Weight) + (1.85 * self.height) - (4.68 * self.age)
-                print(" BMI :",a)
-                break
+        else:
+            print("성별을 잘못 입력하셨습니다. 다시 입력하세요.")
+        
+        return Bmr
 
-            else:
-                print("성별을 잘못 입력하셨습니다. 다시 입력하세요.")
-                continue
-
-b = int(input("성별를 입력해주세요 : "))
+b = input("성별를 입력해주세요 : ")
 c = int(input("몸무게를 입력해주세요 : "))
 d = int(input("키를 입력해주세요 : "))
 e = int(input("나이를 입력해주세요 : "))
 
 bmi = BMI(b,c,d,e)
-bmi1 = bmi.__init__()
-print(bmi1)
+bmr = bmi.BMR()
+print("가초대사량 : ",bmr)
 
-class Exercise():
+class Exercise:
 
-    def __init__ (self,Exercise_selection,Time,Level,Result):
-
+    def __init__ (self,Exercise_selection,Time,Level):
             
         self.Exercise_selection = Exercise_selection
         self.Time = Time
         self.Level = Level
 
-           
-        def Exercise():
+        while True:
+        
+            if Exercise_selection == 1:
 
-            while True:
-                self.Result == 0
-            
-                if Exercise_selection == 1:
+                exercise_calorie = Time*(600 + Level*50)
+                return exercise_calorie
 
-                    self.Result += Time*(600 + Level*50)
-                    print(self.Result."만큼 칼로리 소모가 가능합니다.")
-                    break
+            elif Exercise_selection == 2:
 
-                elif Exercise_selection == 2:
+                exercise_calorie = Time*(600 + Level*50)
+                return exercise_calorie
 
-                    self.Result += Time*(600 + Level*50)
-                    print(self.Result."만큼 칼로리 소모가 가능합니다.")
-                    break
+            elif Exercise_selection == 3:
 
-                elif Exercise_selection == 3:
+                exercise_calorie = Time*(300 + Level*25)
+                return exercise_calorie
 
-                    self.Result += Time*(300 + Level*25)
-                    print(self.Result."만큼 칼로리 소모가 가능합니다.")
-                    break
+            elif Exercise_selection == 4:
 
-                elif Exercise_selection == 4:
+                exercise_calorie = Time*(520 + Level*40)
+                return exercise_calorie
 
-                    self.Result += Time*(520 + Level*40)
-                    print(self.Result."만큼 칼로리 소모가 가능합니다.")
-                    break
+            elif Exercise_selection == 5:
 
-                elif Exercise_selection == 5:
+                exercise_calorie = Time*(600 + Level*50)
+                return exercise_calorie
 
-                    self.Result += Time*(600 + Level*50)
-                    print(self.Result."만큼 칼로리 소모가 가능합니다.")
-                    break
-
-                else:
-                    print("운동의 종류를 잘못 입력하셨습니다.")
-                    continue
+            else:
+                return("운동의 종류를 잘못 입력하셨습니다.")
 
 aa = int(input("운동할 방식을 선택하세요 /수영=1,달리기=2,걷기=3,농구=4,축구=5"))
 bb = int(input("운동의 강도를 설정해 주세요 /1~5 : "))
-cc = int(input("운동할 시간을 설정해주세요 = "))
+cc = int(input("운동할 시간을 설정해주세요 : "))
 
-exercise1 = Exercise(aa,bb,cc)
-Exercise = exercise1.__init__
-print(Exercise)
+exercise1 = Exercise.__init__(aa,bb,cc)
+print(exercise1)
 
 class EX(Exercise):
 
     def __init__ (self,Level):
 
-        super().__init__(Result)
-
         self.Level = Level
-        global Result2 = Ex_result
         
         if Level == 1:
-            print(Ex_result)
+            print(exercise1)
 
         elif Level == 2:
-            print(Ex_result)
+            print(exercise1)
 
         elif Level == 3:
-            print(Ex_result)
+            print(exercise1)
 
         elif Level == 4:
-            print(Ex_result)
+            print(exercise1)
 
         elif Level == 5:
-            print(Ex_result)
+            print(exercise1)
 
         else:
             print("운동량의 강도를 잘못 설정하셨습니다.")
@@ -132,15 +113,15 @@ class Daily_calories(EX):
             self.calorie_intake = calorie_intake 
             super().__init__(EX)
 
-            real_result = Bmi + Result2 - calorie_intake 
+            real_result = bmi + exercise1 - calorie_intake 
 
             while True:
 
-                if real_result > 0
+                if real_result > 0:
 
                     print(real_result,"만큼 소비해야 합니다.")
 
-                elif real_result == 0
+                elif real_result == 0:
 
                     print("하루 적정 칼로리만큼 섭취했습니다.")
 
