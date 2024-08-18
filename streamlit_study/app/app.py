@@ -30,11 +30,4 @@ if button:
         except ZeroDivisionError:
             st.error("나누는 값이 0입니다.")
             
-            
-    
-    
-
-
-
-
-    
+ 
