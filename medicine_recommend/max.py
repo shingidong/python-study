@@ -142,4 +142,4 @@ if st.session_state.logged_in:
     elif option == "밴드":
         symptom = st.selectbox("밴드의 크기를 선택하세요:", band_size)
         recommendation = band(symptom)
-        st.write("밴드를 가져가세요.")
+        st.write(recommendation)
