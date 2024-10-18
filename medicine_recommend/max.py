@@ -50,7 +50,8 @@ def login(username, password):
 
 # Streamlit 앱 시작
 st.title("의약품 추천 시스템")
-st.write("by.10218신기동")
+st.write("by.T.T.S")
+st.write("신기동 ㅋㄹ")
 
 # 로그인 상태 변수
 if 'logged_in' not in st.session_state:
