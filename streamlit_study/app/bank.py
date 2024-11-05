@@ -16,7 +16,7 @@ def initialize_session_state():
 # 환율 데이터를 업데이트하는 함수
 def update_exchange_rate(currency, rate):
     if currency in st.session_state.exchange_rates:
-        # TODO: 환율 데이터를 업데이트하기
+        st.session_state.exchange_rates[currency]= rate
         pass  # TODO: 여기에 환율 데이터를 업데이트하는 코드를 작성하세요
     else:
         # TODO: 새로운 통화를 추가하기
@@ -34,6 +34,7 @@ def calculate_exchange(amount, target_currency):
 
 # 입금 함수
 def deposit(amount):
+    
     # TODO: 입금 금액을 현재 잔액에 추가하기
     pass  # TODO: 여기에 입금 기능을 구현하세요
 

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의약품 추천 시스템</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8.5px);
+            -webkit-backdrop-filter: blur(8.5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #f0f0f0;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            font-size: 16px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        select:hover, button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        button {
+            margin-top: 20px;
+            background: #0072ff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #f0f0f0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .result::before {
+            content: "💊";
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>의약품 추천 시스템</h1>
+        <div class="form-group">
+            <label for="symptomType">외상인지 내상인지 혹은 밴드를 선택하세요:</label>
+            <select id="symptomType" onchange="updateSymptomOptions()">
+                <option value="">선택하세요</option>
+                <option value="외상">외상</option>
+                <option value="내상">내상</option>
+                <option value="밴드">밴드</option>
+            </select>
+        </div>
+        
+        <div class="form-group" id="symptomGroup" style="display: none;">
+            <label for="symptom">증상을 선택하세요:</label>
+            <select id="symptom"></select>
+        </div>
+
+        <button onclick="recommendMedicine()">의약품 추천</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const outSymptoms = ["근육통", "근육피로", "관절통", "삠", "벌레물림", "염증", "찰과상", "화상", "감염", "여드름"];
+        const inSymptoms = ["신체 통증", "소화불량", "속쓰림", "발열", "체", "근육통", "관절염", "감기", "독감", "오한"];
+
+        function updateSymptomOptions() {
+            const symptomType = document.getElementById("symptomType").value;
+            const symptomSelect = document.getElementById("symptom");
+            const symptomGroup = document.getElementById("symptomGroup");
+            symptomSelect.innerHTML = "";
+
+            if (symptomType === "외상") {
+                outSymptoms.forEach(symptom => {
+                    const option = document.createElement("option");
+                    option.value = symptom;
+                    option.textContent = symptom;
+                    symptomSelect.appendChild(option);
+                });
+                symptomGroup.style.display = "block";
+            } else if (symptomType === "내상") {
+                inSymptoms.forEach(symptom => {
+                    const option = document.createElement("option");
+                    option.value = symptom;
+                    option.textContent = symptom;
+                    symptomSelect.appendChild(option);
+                });
+                symptomGroup.style.display = "block";
+            } else {
+                symptomGroup.style.display = "none";
+            }
+        }
+
+        function recommendMedicine() {
+            const symptomType = document.getElementById("symptomType").value;
+            const symptom = document.getElementById("symptom").value;
+            const resultDiv = document.getElementById("result");
+
+            let recommendation = "";
+
+            if (symptomType === "외상") {
+                if (["근육통", "근육피로", "관절통", "삠"].includes(symptom)) {
+                    recommendation = "환자에게 알맞는 의약품은 아렉스(파스)입니다.";
+                } else if (symptom === "벌레물림") {
+                    recommendation = "환자에게 알맞는 약은 버물리(벌레물림 약)입니다.";
+                } else if (["염증", "찰과상", "화상", "감염", "여드름"].includes(symptom)) {
+                    recommendation = "환자에게 알맞는 약은 후시딘(연고)입니다.";
+                } else {
+                    recommendation = "잘못된 증상입니다. 다시 선택하세요.";
+                }
+            } else if (symptomType === "내상") {
+                if (["신체 통증", "근육통", "관절염"].includes(symptom)) {
+                    recommendation = "환자에게 알맞는 의약품은 타이레놀(진통제)입니다.";
+                } else if (["소화불량", "체"].includes(symptom)) {
+                    recommendation = "환자에게 알맞는 약은 다제스(소화제)입니다.";
+                } else if (["발열", "감기", "독감", "오한"].includes(symptom)) {
+                    recommendation = "환자에게 알맞는 약은 부루펜(해열제)입니다.";
+                } else if (symptom === "속쓰림") {
+                    recommendation = "환자에게 알맞는 약은 위장약입니다.";
+                } else {
+                    recommendation = "잘못된 증상입니다. 다시 선택하세요.";
+                }
+            } else if (symptomType === "밴드") {
+                recommendation = "밴드를 가져가세요.";
+            } else {
+                recommendation = "증상 유형을 먼저 선택하세요.";
+            }
+
+            resultDiv.textContent = recommendation;
+        }
+    </script>
+</body>
+</html>
