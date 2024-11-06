@@ -45,15 +45,15 @@ def display_image_grid(image_path, image_name):
 
     image = Image.open(image_path)
     width, height = image.size
-    cell_width = width // 3
-    cell_height = height // 3
+    cell_width = width // 4
+    cell_height = height // 4
 
     st.write("손상된 블록을 선택하세요")
 
     with st.form("labeling_form"):
-        for i in range(3):
-            cols = st.columns(3)
-            for j in range(3):
+        for i in range(4):
+            cols = st.columns(4)
+            for j in range(4):
                 cell = image.crop(
                     (j * cell_width, i * cell_height, (j + 1) * cell_width, (i + 1) * cell_height)
                 )
@@ -70,8 +70,8 @@ def display_image_grid(image_path, image_name):
         st.write("폼이 제출되었습니다!")  # 디버깅용 출력
         # 세션에서 `current_image`와 체크박스 상태를 가져와 저장
         saved_image_name = st.session_state.current_image  # 제출된 이미지 이름을 저장
-        for i in range(3):
-            for j in range(3):
+        for i in range(4):
+            for j in range(4):
                 cell_key = f"checkbox_{saved_image_name}_{i}_{j}"
                 is_damaged = st.session_state.get(cell_key, False)
                 c.execute("INSERT INTO labeling_data (image_name, grid_x, grid_y, is_damaged) VALUES (?, ?, ?, ?)",
