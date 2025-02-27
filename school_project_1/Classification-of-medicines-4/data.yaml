@@ -1,0 +1,12 @@
+names:
+- '-'
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: classification-of-medicines
+  url: https://universe.roboflow.com/kidong/classification-of-medicines/dataset/4
+  version: 4
+  workspace: kidong
+test: ../test/images
+train: ../train/images
+val: ../valid/images
